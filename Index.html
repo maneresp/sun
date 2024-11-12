@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة شمس السادس</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 1s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ffd700;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: #b0b3d6;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 100%;
+            border: 2px solid #ffd700;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            background-color: #333;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #f39c12;
+        }
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f39c12;
+            color: #fff;
+            font-size: 1em;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #e67e22;
+        }
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .footer {
+            margin-top: 20px;
+            color: #d3d3d3;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>منصة شمس السادس</h1>
+        <p>أدخل كود الفيديو لعرض المحاضرة:</p>
+        <input type="text" id="videoCode" placeholder="أدخل الكود هنا">
+        <button onclick="playVideo()">تشغيل المحاضرة</button>
+        <div id="videoContainer" style="display:none; margin-top: 20px;">
+            <iframe id="videoFrame" allow="autoplay; fullscreen"></iframe>
+        </div>
+        <div class="footer">
+            <p>القناة الرئيسة على تيليجرام: <a href="https://t.me/u153646" target="_blank">اضغط هنا</a></p>
+            <p>قناة كودات شمس السادس: <a href="https://t.me/+qYVVoN1zWOljNTEy" target="_blank">اضغط هنا</a></p>
+        </div>
+    </div>
+
+    <script>
+        function playVideo() {
+            const videoCode = document.getElementById('videoCode').value.trim();
+            if (videoCode) {
+                try {
+                    // فك تشفير Base64
+                    const decodedCode = atob(videoCode);
+                    const videoUrl = `https://iframe.mediadelivery.net/embed/215061/${decodedCode}?autoplay=true&loop=false&muted=false&preload=true&responsive=true`;
+                    
+                    // تحديث iframe بالرابط وتفعيل العرض
+                    document.getElementById('videoFrame').src = videoUrl;
+                    document.getElementById('videoContainer').style.display = "block";
+                } catch (e) {
+                    console.error("Error decoding Base64:", e);
+                    alert("الكود المدخل غير صحيح.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
